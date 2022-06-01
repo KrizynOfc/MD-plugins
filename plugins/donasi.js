@@ -15,7 +15,7 @@ Berapapun donasi kalian akan sangat berarti 👍
 Arigatou!
 
 Contact Owner For Detail:
-wa.me/994407430641 (Owner)`
+wa.me/687827906 (Owner)`
 let message = await prepareWAMessageMedia({ image: {url: 'https://telegra.ph/file/ca517a39ce85c8a4c0479.jpg' }}, { upload: conn.waUploadToServer })
      const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
      templateMessage: {
