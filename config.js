@@ -1,6 +1,6 @@
 let fs = require('fs')
 
-global.owner = ['994407430641', '6283844009539'] // Put your number here
+global.owner = ['6281363064991', '6283844009539', '6285240750713'] // Put your number here
 global.APIs = { // API Prefix
   // name: 'https://website'
   nrtm: 'https://nurutomo.herokuapp.com',
