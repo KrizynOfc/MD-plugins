@@ -206,8 +206,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     }
   })
     if (teks == '404') {
-        const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fromObject({
-        listMessage: {
+         const listMessage: {
             title: aoa,
             description: 'Silahkan Pilih Menu Dibawah!',
             buttonText: 'Pilih Disini',
@@ -412,11 +411,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
                 }],
                 "title": "─────「 27 」"
               }
-            ], "contextInfo": {
-              "stanzaId": m.key.id,
-              "participant": m.sender,
-              "quotedMessage": m.message
-            }
+     
     return conn.sendMessage(m.chat, template, { quoted: fkon, mentions: await conn.parseMention(aoa), contextInfo: { forwardingScore: 99999, isForwarded: true }})
     }
     let groups = {}
