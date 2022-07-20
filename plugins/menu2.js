@@ -121,7 +121,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
  
 
   try {
-    //let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
+    let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
     let { exp, limit, level, role, registered } = global.db.data.users[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
     let name = await registered ? global.db.data.users[m.sender].name : conn.getName(m.sender)
@@ -144,6 +144,70 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
       minute: 'numeric',
       second: 'numeric'
     })
+     let wib = moment.tz('Asia/Jakarta').format('HH:mm:ss') 
+     let wibh = moment.tz('Asia/Jakarta').format('HH') 
+     let wibm = moment.tz('Asia/Jakarta').format('mm') 
+     let wibs = moment.tz('Asia/Jakarta').format('ss') 
+     let wit = moment.tz('Asia/Jayapura').format('HH:mm:ss') 
+     let wita = moment.tz('Asia/Makassar').format('HH:mm:ss') 
+     let wktuwib = `${wibh} H ${wibm} M ${wibs} S` 
+     const hariRaya = new Date('January 1, 2023 23:59:59') 
+     const sekarang = new Date().getTime() 
+     const Selisih = hariRaya - sekarang 
+     const jhari = Math.floor( Selisih / (1000 * 60 * 60 * 24)); 
+     const jjam = Math.floor( Selisih % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)) 
+     const mmmenit = Math.floor( Selisih % (1000 * 60 * 60) / (1000 * 60)) 
+     const ddetik = Math.floor( Selisih % (1000 * 60) / 1000) 
+     const hariRayaramadan = new Date('April 21, 2023 23:59:59') 
+     const sekarangg = new Date().getTime() 
+     const lebih = hariRayaramadan - sekarangg 
+     const harii = Math.floor( lebih / (1000 * 60 * 60 * 24)); 
+     const jamm = Math.floor( lebih % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)) 
+     const menitt = Math.floor( lebih % (1000 * 60 * 60) / (1000 * 60)) 
+     const detikk = Math.floor( lebih % (1000 * 60) / 1000) 
+     const ultah = new Date('August 18, 2022 23:59:59') 
+     const sekarat = new Date().getTime()  
+     const Kurang = ultah - sekarat 
+     const ohari = Math.floor( Kurang / (1000 * 60 * 60 * 24)); 
+     const ojam = Math.floor( Kurang % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)) 
+     const onet = Math.floor( Kurang % (1000 * 60 * 60) / (1000 * 60)) 
+     const detek = Math.floor( Kurang % (1000 * 60) / 1000) 
+     let fkon = { key: { fromMe: false, participant: '0@s.whatsapp.net', ...(m.chat ? { remoteJid: 'status@broadcast' } : {}) }, message: { contactMessage: { displayName: '𝗧 𝗜 𝗠 𝗘 : ' + wktuwib, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}} 
+     let ftoko = { 
+     key: { 
+     fromMe: false, 
+     participant: `${m.sender.split`@`[0]}` + '@s.whatsapp.net', 
+     remoteJid: 'status@broadcast', 
+   }, 
+   message: { 
+   "productMessage": { 
+   "product": { 
+   "productImage":{ 
+   "mimetype": "image/jpeg", 
+   "jpegThumbnail": await (await fetch('https://telegra.ph/file/5dfd34a2044262ab463e8.jp')), 
+     }, 
+   "title": `${ucapan()}`, 
+   "description": '𝗧 𝗜 𝗠 𝗘 : ' + wktuwib, 
+   "currencyCode": "US", 
+   "priceAmount1000": "100", 
+   "retailerId": wm, 
+   "productImageCount": 999 
+         }, 
+   "businessOwnerJid": `${m.sender.split`@`[0]}@s.whatsapp.net` 
+   } 
+   } 
+   } 
+     let pe = '```' 
+     let { premium, premiumTime } = global.db.data.home[m.sender] 
+     let _uptime = process.uptime() * 1000 
+     let _muptime 
+     if (process.send) { 
+       process.send('uptime') 
+       _muptime = await new Promise(resolve => { 
+         process.once('message', resolve) 
+         setTimeout(resolve, 1000) 
+       }) * 1000 
+     } 
     let _uptime = process.uptime() * 1000
     let _muptime
     if (process.send) {
@@ -162,7 +226,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     let lebaran = msToDate(_lebaran - dann)
     let totalreg = Object.keys(global.db.data.users).length
     
-let aoa = `${ucapan()} ${name}.`.trim()
+
 let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
     return {
       help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
@@ -174,6 +238,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     }
   })
     if (teks == '404') {
+      let aoa = `${ucapan()} ${name}.`.trim()
         const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fromObject({
         listMessage: {
             title: aoa,
@@ -385,13 +450,13 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
               "participant": m.sender,
               "quotedMessage": m.message
             }
-    }}), { userJid: m.participant || m.key.remoteJid, quoted: m });
+   }}), { userJid: m.participant || m.key.remoteJid, quoted: fkontak });
     return await conn.relayMessage(
         m.key.remoteJid,
         template.message,
         { messageId: template.key.id }
     )
-    }
+    } 
     let groups = {}
     for (let tag in tags) {
       groups[tag] = []
@@ -435,16 +500,30 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
+    let pramesh = global.loli[Math.floor(Math.random() * 352)]
+    await conn.send3ButtonImg(m.chat, await (await fetch(fla + teks)).buffer(), text.trim(), wm, 'Donasi', '.donasi', 'Owner', '.owner', 'Rules', '.rules', m, { 
+     quoted: ftoko, 
+     contextInfo: { forwardingScore: 99999, isForwarded: true, 
+         externalAdReply: { 
+             title: '✧ PRAMESH DEVICE Created By KrizynOfc', 
+             body: `${pickRandom(['udah makan belum kak?', 'udh mandi belum kak?', 'Semangat ya kak!', 'Jangan begadang mulu ya!', 'jangan spam ya kak!', 'Jangan lupa donasi yak kak! >.<', 'Jaga kesehatan yaw kak!', 'Jangan lupa makan!', 'Jangan lupa istirahat yak! >.<', 'I Love you kak >.< 💗✨', 'Pr nya udh belum kak?', 'Jangan kebanyakan main hp yk! nanti sakit :‹'])}`, 
+             description: `${pickRandom(['udah makan belum kak?', 'udh mandi belum kak?', 'Semangat ya kak!', 'Jangan begadang mulu ya!', 'jangan spam ya kak!', 'Jangan lupa donasi yak kak! >.<', 'Jaga kesehatan yaw kak!', 'Jangan lupa makan!', 'Jangan lupa istirahat yak! >.<', 'I Love you kak >.< 💗✨', 'Pr nya udh belum kak?', 'Jangan kebanyakan main hp yk! nanti sakit :‹'])}`, 
+             mediaType: 2, 
+           thumbnail: await (await fetch(pramesh)),
+          mediaUrl: `${pickRandom([`https://www.instagram.com/mhdfakri_`, `https://youtube.com/c/hokenbeusz`])}` 
+         } 
+      } 
+     })
     //let pp = await conn.profilePictureUrl(conn.user.jid, 'image').catch(_ => path.join(__dirname, '../src/avatar_contact.png'))
     //await conn.sendTBL(m.chat, text.trim(), wm, fla + teks, dtu, urlnya, dtc, nmbrnya, `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`, m)
-    let gb = global.loli[Math.floor(Math.random() * 352)]
+    /*let gb = global.loli[Math.floor(Math.random() * 352)]
     let hy = await conn.send2ButtonImg(m.chat, gb, text.trim(), `Hitung Mundur Lebaran:\n${lebaran}\n\n${wm}`, 'Rules', '.rules', 'Owner', '.owner', m)
     conn.relayMessage(m.chat, { reactionMessage: {
    key: {
    id: hy.key.id,
    remoteJid: m.chat,
    fromMe: true
-   }, text: '👑' }}, { messageId: hy.key.id })
+   }, text: '👑' }}, { messageId: hy.key.id })*/
     /*await conn.sendTBD(m.chat, text, wm, thumbd, dtu, urlnya, dtc, nmbrnya, `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`)*/
     } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
