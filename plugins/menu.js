@@ -1,4 +1,4 @@
-const { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, downloadContentFromMessage, downloadHistory, proto, getMessage, generateWAMessageContent, prepareWAMessageMedia } = require('@adiwajshing/baileys-md')
+/*const { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, downloadContentFromMessage, downloadHistory, proto, getMessage, generateWAMessageContent, prepareWAMessageMedia } = require('@adiwajshing/baileys-md')
 let fs = require('fs')
 let path = require('path')
 let levelling = require('../lib/levelling')
@@ -234,4 +234,4 @@ function msToDate(ms) {
     sec = Math.floor((minutesms) / (1000));
     return days + " Hari " + hours + " Jam " + minutes + " Menit";
     // +minutes+":"+sec;
-}
+}*/
