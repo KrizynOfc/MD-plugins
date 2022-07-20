@@ -199,15 +199,6 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
    } 
      let pe = '```' 
      let { premium, premiumTime } = global.db.data.home[m.sender] 
-     let _uptime = process.uptime() * 1000 
-     let _muptime 
-     if (process.send) { 
-       process.send('uptime') 
-       _muptime = await new Promise(resolve => { 
-         process.once('message', resolve) 
-         setTimeout(resolve, 1000) 
-       }) * 1000 
-     } 
     let _uptime = process.uptime() * 1000
     let _muptime
     if (process.send) {
