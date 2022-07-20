@@ -437,7 +437,15 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     //let pp = await conn.profilePictureUrl(conn.user.jid, 'image').catch(_ => path.join(__dirname, '../src/avatar_contact.png'))
     //await conn.sendTBL(m.chat, text.trim(), wm, fla + teks, dtu, urlnya, dtc, nmbrnya, `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`, m)
-    await conn.sendTBD(m.chat, text, wm, thumbd, dtu, urlnya, dtc, nmbrnya, `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`)
+    let gb = global.loli[Math.floor(Math.random() * 352)]
+    let hy = await conn.send2ButtonImg(m.chat, gb, text.trim(), `Hitung Mundur Lebaran:\n${lebaran}\n\n${wm}`, 'Rules', '.rules', 'Owner', '.owner', m)
+    conn.relayMessage(m.chat, { reactionMessage: {
+   key: {
+   id: hy.key.id,
+   remoteJid: m.chat,
+   fromMe: true
+   }, text: '👑' }}, { messageId: hy.key.id })
+    /*await conn.sendTBD(m.chat, text, wm, thumbd, dtu, urlnya, dtc, nmbrnya, `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`)*/
     } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
