@@ -153,6 +153,38 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
         setTimeout(resolve, 1000)
       }) * 1000
     }
+     let wib = moment.tz('Asia/Jakarta').format('HH:mm:ss') 
+     let wibh = moment.tz('Asia/Jakarta').format('HH') 
+     let wibm = moment.tz('Asia/Jakarta').format('mm') 
+     let wibs = moment.tz('Asia/Jakarta').format('ss') 
+     let wit = moment.tz('Asia/Jayapura').format('HH:mm:ss') 
+     let wita = moment.tz('Asia/Makassar').format('HH:mm:ss') 
+     let wktuwib = `${wibh} H ${wibm} M ${wibs} S` 
+     let fkon = { key: { fromMe: false, participant: '0@s.whatsapp.net', ...(m.chat ? { remoteJid: 'status@broadcast' } : {}) }, message: { contactMessage: { displayName: '𝗧 𝗜 𝗠 𝗘 : ' + wktuwib, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}} 
+     let ftoko = { 
+     key: { 
+     fromMe: false, 
+     participant: `${m.sender.split`@`[0]}` + '@s.whatsapp.net', 
+     remoteJid: 'status@broadcast', 
+   }, 
+   message: { 
+   "productMessage": { 
+   "product": { 
+   "productImage":{ 
+   "mimetype": "image/jpeg", 
+   "jpegThumbnail": await (await fetch('https://telegra.ph/file/5dfd34a2044262ab463e8.jp')), 
+     }, 
+   "title": `${ucapan()}`, 
+   "description": '𝗧 𝗜 𝗠 𝗘 : ' + wktuwib, 
+   "currencyCode": "US", 
+   "priceAmount1000": "100", 
+   "retailerId": wm, 
+   "productImageCount": 999 
+         }, 
+   "businessOwnerJid": `${m.sender.split`@`[0]}@s.whatsapp.net` 
+   } 
+   } 
+   } 
     let muptime = clockString(_muptime)
     let uptime = clockString(_uptime)
     let _ramadhan = new Date("April 02 2022 00:00:00").getTime()
@@ -385,12 +417,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
               "participant": m.sender,
               "quotedMessage": m.message
             }
-    }}), { userJid: m.participant || m.key.remoteJid, quoted: m });
-    return await conn.relayMessage(
-        m.key.remoteJid,
-        template.message,
-        { messageId: template.key.id }
-    )
+    return conn.sendMessage(m.chat, template, { quoted: fkon, mentions: await conn.parseMention(aoa), contextInfo: { forwardingScore: 99999, isForwarded: true }})
     }
     let groups = {}
     for (let tag in tags) {
