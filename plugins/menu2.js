@@ -23,7 +23,7 @@ INFO MENU:
 }
 
 let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
-  if (global.db.data.settings.setmenu == 'all') return handler.disabled = true
+  
   let tags
   let teks = `${args[0]}`.toLowerCase()
   let arrayMenu = ['all', 'main', 'anonymous', 'game', 'rpg', 'jodoh', 'xp', 'premium', 'group', 'vote', 'fun', 'sticker', 'maker', 'github', 'anime', 'internet', 'tools', 'downloader', 'nsfw', 'info', 'owner']
